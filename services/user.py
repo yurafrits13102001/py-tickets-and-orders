@@ -1,5 +1,4 @@
 from db.models import User
-from django.db.models import QuerySet
 
 
 def create_user(username: str, password: str,

@@ -16,11 +16,11 @@ def create_order(tickets: list[dict],
         order = Order(user=user)
         order.save()
         if date:
-            parsed_date = datetime.strptime(date, '%Y-%m-%d %H:%M')
+            parsed_date = datetime.strptime(date, "%Y-%m-%d %H:%M")
             Order.objects.filter(pk=order.pk).update(created_at=parsed_date)
             order.refresh_from_db()
         for ticket in tickets:
-            movie_session = MovieSession.objects.get(pk=ticket['movie_session'])
+            movie_session = MovieSession.objects.get(pk=ticket["movie_session"])
             Ticket.objects.create(order=order,
                                   movie_session=movie_session,
                                   seat=ticket["seat"],
