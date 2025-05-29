@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db import transaction
-from django.db.models import QuerySet
 
 from db.models import Order, User, MovieSession
 
@@ -20,7 +19,9 @@ def create_order(tickets: list[dict],
             Order.objects.filter(pk=order.pk).update(created_at=parsed_date)
             order.refresh_from_db()
         for ticket in tickets:
-            movie_session = MovieSession.objects.get(pk=ticket["movie_session"])
+            movie_session = MovieSession.objects.get(
+                pk=ticket["movie_session"]
+            )
             Ticket.objects.create(order=order,
                                   movie_session=movie_session,
                                   seat=ticket["seat"],
